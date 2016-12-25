@@ -187,4 +187,4 @@ for iloop in range(10000):
         print "----------"
         print matrixLEDcurrent    
 
-    time.sleep(0.05 )    
+    time.sleep(0.01 )    
