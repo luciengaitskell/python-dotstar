@@ -124,10 +124,18 @@ for i in range(16):
             matrixLEDindex.append( matrixLEDindexOffset + i*16+j )
         else:
             matrixLEDindex.append( matrixLEDindexOffset + i*16+(15-j) )
+              
                 
+colscale = 1 # 1, 256 or 256^2 to set b , r, or g  
 
 while True:
+    
         
+    if random.random()>0.99: # Change color every ~100 cycles
+          colscale = colscale * 256
+          if colscale>256^2:
+              colscale = 1
+                
     # Move the current LED levels one to the left, and decrease the intensity level
     if True: # Rolls downwards
         for i in range(16):
@@ -178,7 +186,8 @@ while True:
             matrixLEDcurrent[16*i+j] = matrixLEDcurrent[ 16*i+j ] +  matrixLEDintensity[ 16*i+j ] # Store current values
             ## pixels( matrixLEDindex[ 16*i+j] ) = matrixLEDcurrent[ 16*i+j ]
             if flagPi:
-                strip.setPixelColor( matrixLEDindex[ 16*i+j ] , 0 , 0 , matrixLEDcurrent[16*i+j] ) # Write to pixel o/p, g,r,b
+                # strip.setPixelColor( matrixLEDindex[ 16*i+j ] , 0 , 0 , matrixLEDcurrent[16*i+j] ) # Write to pixel o/p, g,r,b
+                strip.setPixelColor( matrixLEDindex[ 16*i+j ] , colscale * matrixLEDcurrent[16*i+j] ) # Write to pixel o/p, g,r,b
  
  #----- Rest of Strip
     pixstart = 0
@@ -190,7 +199,8 @@ while True:
     for i in [item for item in range(pixstart,pixstop,1) if item not in pixlistbad]:
         x = 5 + int(math.floor(pow( random.random() , 20. )  * float(maxLEDintensity) ))
         x = min( maxLEDintensity , x )
-        strip.setPixelColor(i, 0 , 0 , x ) # 
+        # strip.setPixelColor(i, 0 , 0 , x ) # blue
+        strip.setPixelColor(i, colscale * x ) # blue
 
  
 #    print matrixLEDcurrent    
