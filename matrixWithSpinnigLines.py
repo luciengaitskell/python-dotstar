@@ -127,7 +127,7 @@ for iloop in range(10):
     if True: # iloop < 10
         for i in range(16):
             for j in range(1,16):
-                matrixLEDcurrent[16*i+j] = max(  0 , 0.9 * matrixLEDcurrent[16*(i)+(j-1)]  ) # Decrease intensity
+                matrixLEDcurrent[16*i+j] = max(  0 , int(math.floor( 0.9 * matrixLEDcurrent[16*(i)+(j-1)] )) ) # Decrease intensity
             j=0
             matrixLEDcurrent[ 16*i+j ] = 0
 
