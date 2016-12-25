@@ -126,7 +126,7 @@ for iloop in range(32):
             start = [ 16*random.random()-8. , 16*random.random()-8. , 0 ] 
             end = [ 16*random.random()-8. , 16*random.random()-8. , 0 ]
         else:
-            start = [ -7.5 , -7.5. , 0 ] 
+            start = [ -7.5 , -7.5 , 0 ] 
             end = [ 7.5 , 7.5 , 0 ]
                         
         # Create LED intensity map based on distance from line
