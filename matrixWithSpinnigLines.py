@@ -110,26 +110,37 @@ matrixLEDindex = range(900+254, 900+254+256)
 
 
 
-while True:
-    
+for iloop in range(32):
+        
     # Move the current LED levels one to the left, and decrease the intensity level
     for i in range(16):
         for j in range(15):
             matrixLEDcurrent[16*i+j] = max(  0 , matrixLEDcurrent[16*i+j] - 10 )
         j=15
         matrixLEDcurrent[ 16*i+j ] = 0
-        
-    # Pick a line with two random end points
-    start = [ 16*random.random()-8. , 16*random.random()-8. , 0 ] 
-    end = [ 16*random.random()-8. , 16*random.random()-8. , 0 ]
 
-    # Create LED intensity map based on distance from line
-    mindist = 0.5 # Min distance
-    for i in range(16):
-        for j in range(16):
-            d = max(mindist , pnt2line( matrixLEDxy[16*i+j] , start, end ) ) 
-            matrixLEDintensity[16*i+j] = int( math.floor( 64. * pow( mindist / d , 4. ) ))
-    
+
+    if iloop == 0:  
+        if 0:
+            # Pick a line with two random end points
+            start = [ 16*random.random()-8. , 16*random.random()-8. , 0 ] 
+            end = [ 16*random.random()-8. , 16*random.random()-8. , 0 ]
+        else:
+            start = [ -7.5 , -7.5. , 0 ] 
+            end = [ 7.5 , 7.5 , 0 ]
+                        
+        # Create LED intensity map based on distance from line
+        mindist = 0.5 # Min distance
+        for i in range(16):
+            for j in range(16):
+                d = max(mindist , pnt2line( matrixLEDxy[16*i+j] , start, end ) ) 
+                matrixLEDintensity[16*i+j] = int( math.floor( 64. * pow( mindist / d , 4. ) ))
+    else:
+        # Don't add anything new
+        for i in range(16):
+            for j in range(16):
+                matrixLEDintensity[16*i+j] = 0
+        
     
     # Add the line intensity to the map and display it
     for i in range(16):
