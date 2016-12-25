@@ -111,7 +111,7 @@ for i in range(16):
         
 # Set up the LED APA102 index corresponding to the matrix
 # Must take account of snake pattern
-matrixLEDindexOffset = 900+254
+matrixLEDindexOffset = 3*300+255
 matrixLEDindex = []
 for i in range(16):
     for j in range(16):
