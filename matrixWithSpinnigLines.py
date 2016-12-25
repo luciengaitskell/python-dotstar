@@ -142,7 +142,7 @@ for iloop in range(10):
             end = [ 7.5 , 7.5 , 0 ]
                         
         # Create LED intensity map based on distance from line
-        mindist = 0.5 # Min distance
+        mindist = 0.1 # Min distance
         for i in range(16):
             for j in range(16):
                 d = max(mindist , pnt2line( matrixLEDxy[16*i+j] , start, end ) ) 
