@@ -144,7 +144,7 @@ for iloop in range(10000):
             matrixLEDcurrent[ 16*i+j ] = 0
 
 
-    if random.random() < 0.5 : # New line x% of time  
+    if random.random() < 1.0 : # New line x% of time  
         if False: # True - random position, 
             # Pick a line with two random end points
             start = [ 16.*random.random()-8. , 16.*random.random()-8. , 0 ] 
@@ -153,7 +153,7 @@ for iloop in range(10000):
         elif True: # True - random position on larger canvas, 
             # Pick a line with two random end points
             start = [ 32.*random.random()-16. , 32.*random.random()-16. , 0 ] 
-            end = [ 32.*random.random()-16.. , 32.*random.random()-16. , 0 ]
+            end = [ 32.*random.random()-16. , 32.*random.random()-16. , 0 ]
 
         else: # Simple Diagonal  - fixed line/simple diagnonal
             start = [ -7.5 , -7.5 , 0 ] 
