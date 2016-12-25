@@ -182,7 +182,7 @@ while True:
  
  #----- Rest of Strip
     pixstart = 0
-    pixstop = pixstart+3*300
+    pixstop = pixstart+3*300+255
     pixlistall = list( range(pixstart,pixstop) )
     pixlistbad = [593,594]
     pixlistgood = [item for item in pixlistall if item not in pixlistbad ] # Remove bad pixels
