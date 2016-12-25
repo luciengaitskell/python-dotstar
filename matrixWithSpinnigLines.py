@@ -200,7 +200,7 @@ while True:
     else: # Rolls upwards
         for i in range(16):
             for j in range(15):
-                matrixLEDcurrent[16*i+j] = max(  0 , int(math.floor( 0.75 * float( matrixLEDcurrent[16*(i)+(j+1)] ) )) ) # Decrease intensity
+                matrixLEDcurrent[16*i+j] = max(  0 , int(math.floor( 0.5 * float( matrixLEDcurrent[16*(i)+(j+1)] ) )) ) # Decrease intensity
                 # matrixLEDcurrent[16*i+j] = max(  0 ,  matrixLEDcurrent[16*(i)+(j+1)] -10 ) # Decrease intensity
             j=15
             matrixLEDcurrent[ 16*i+j ] = 0
