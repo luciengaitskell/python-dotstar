@@ -4,6 +4,8 @@
 #
 
 flagPi = True
+flagInit = True
+
 
 import math
 import random
@@ -88,7 +90,7 @@ def pnt2line(pnt, start, end):
 numpixels = 3*300+255+256 # Number of LEDs in strip + disk + square
 #for i in range( numpixels ):
 #    pixels.append( 0 )
- 
+
 maxLEDintensity = 64;
 mindist = 0.5 # Min distance for LED relative to line function that is ysed to set intensity 0.1 to 1 is reasonable
 
@@ -124,19 +126,69 @@ for i in range(16):
             matrixLEDindex.append( matrixLEDindexOffset + i*16+j )
         else:
             matrixLEDindex.append( matrixLEDindexOffset + i*16+(15-j) )
+
+
+
+# RINGS SETUP
+
+rings = [
+    [254,254],  #0 - Center point
+    [248,253],  #1
+    [236,247],  #2
+    [216,235],  #3
+    [192,215],  #4
+    [164,191],  #5
+    [132,163],  #6
+    [92,131],   #7
+    [48,91],    #8
+    [0,47],     #9 - Outer-most ring
+]
+
+
+#
+## Set up xy positions of each point
+#matrixLEDxy = []
+#matrixLEDintensity = []
+#matrixLEDcurrent = []
+#
+#ll = [-7.5,-6.5,-5.5,-4.5,-3.5,-2.5,-1.5,-0.5,0.5,1.5,2.5,3.5,4.5,5.5,6.5,7.5]
+#for i in range(16):
+#    for j in range(16):
+#        matrixLEDintensity.append( 0 )
+#        matrixLEDcurrent.append( 0 )
+#        matrixLEDxy.append( [ll[i],ll[j],0] )
+#
+
+
+
               
-                
+                            
+                                          
+                                                        
+                                                                      
+                                                                                                  
+# Use this variable to cycle global colors                
 colscale = 1 # 1, 256 or 256^2 to set b , r, or g  
+
+
+
+# ===============================================================
+
 
 while True:
     
         
-    if random.random()>0.998: # Change color every ~2000 cycles
+    if random.random()>0.998: # Change global color every ~2000 cycles
         # print "Set Color"
         colscale = colscale * 256
         if colscale > 256*256:
             colscale = 1
                 
+                
+# --------------------------------------------------------
+# 16 x 16 MATRIX
+# --------------------------------------------------------
+                                
     # Move the current LED levels one to the left, and decrease the intensity level
     if True: # Rolls downwards
         for i in range(16):
@@ -148,7 +200,7 @@ while True:
     else: # Rolls upwards
         for i in range(16):
             for j in range(15):
-                matrixLEDcurrent[16*i+j] = max(  0 , int(math.floor( 0.9 * float( matrixLEDcurrent[16*(i)+(j+1)] ) )) ) # Decrease intensity
+                matrixLEDcurrent[16*i+j] = max(  0 , int(math.floor( 0.75 * float( matrixLEDcurrent[16*(i)+(j+1)] ) )) ) # Decrease intensity
                 # matrixLEDcurrent[16*i+j] = max(  0 ,  matrixLEDcurrent[16*(i)+(j+1)] -10 ) # Decrease intensity
             j=15
             matrixLEDcurrent[ 16*i+j ] = 0
@@ -190,9 +242,22 @@ while True:
                 # strip.setPixelColor( matrixLEDindex[ 16*i+j ] , 0 , 0 , matrixLEDcurrent[16*i+j] ) # Write to pixel o/p, g,r,b
                 strip.setPixelColor( matrixLEDindex[ 16*i+j ] , colscale * matrixLEDcurrent[16*i+j] ) # Write to pixel o/p, g,r,b
  
+# --------------------------------------------------------
+# DISK
+# --------------------------------------------------------
+
+
+
+
+# --------------------------------------------------------
+# STRIP
+# --------------------------------------------------------
+
+
  #----- Rest of Strip
     pixstart = 0
-    pixstop = pixstart+3*300+255
+#    pixstop = pixstart+3*300  # Just strip
+    pixstop = pixstart+3*300+255 # Strip and disk 
     pixlistall = list( range(pixstart,pixstop) )
     pixlistbad = [593,594]
     pixlistgood = [item for item in pixlistall if item not in pixlistbad ] # Remove bad pixels
