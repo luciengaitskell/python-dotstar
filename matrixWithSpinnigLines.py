@@ -90,7 +90,7 @@ numpixels = 3*300+255+256 # Number of LEDs in strip + disk + square
 #    pixels.append( 0 )
  
 maxLEDintensity = 64;
-mindist = 0.25 # Min distance for LED relative to line function
+mindist = 0.5 # Min distance for LED relative to line function that is ysed to set intensity 0.1 to 1 is reasonable
 
  
  
@@ -126,7 +126,7 @@ for i in range(16):
             matrixLEDindex.append( matrixLEDindexOffset + i*16+(15-j) )
                 
 
-for iloop in range(10000):
+for iloop True:
         
     # Move the current LED levels one to the left, and decrease the intensity level
     if True: # Rolls downwards
@@ -145,7 +145,7 @@ for iloop in range(10000):
             matrixLEDcurrent[ 16*i+j ] = 0
 
 
-    if random.random() < 1.0 : # New line x% of time  
+    if random.random() < 1.0 : # Determined how often new line comes in x% of time  
         if False: # True - random position, 
             # Pick a line with two random end points
             start = [ 16.*random.random()-8. , 16.*random.random()-8. , 0 ] 
