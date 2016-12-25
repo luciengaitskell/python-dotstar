@@ -180,6 +180,19 @@ while True:
             if flagPi:
                 strip.setPixelColor( matrixLEDindex[ 16*i+j ] , 0 , 0 , matrixLEDcurrent[16*i+j] ) # Write to pixel o/p, g,r,b
  
+ #----- Rest of Strip
+    pixstart = 0
+    pixstop = pixstart+3*300
+    pixlistall = list( range(pixstart,pixstop) )
+    pixlistbad = [593,594]
+    pixlistgood = [item for item in pixlistall if item not in pixlistbad ] # Remove bad pixels
+
+    for i in [item for item in range(pixstart,pixstop,1) if item not in pixlistbad]:
+        x = 5 + int(math.floor(pow( random.random() , 20. )  * float(maxLEDintensity) ))
+        x = min(float(maxLEDintensity),x)
+        strip.setPixelColor(i, 0 , 0 , x ) # 
+
+ 
 #    print matrixLEDcurrent    
     if flagPi:
         strip.show()                     # Refresh strip
