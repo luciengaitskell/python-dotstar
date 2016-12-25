@@ -87,7 +87,6 @@ numpixels = 3*300+255+256 # Number of LEDs in strip + disk + square
 #    pixels.append( 0 )
      
 strip   = Adafruit_DotStar(numpixels, 4000000) # 4 MHz is more reliable
-
 strip.begin()           # Initialize pins for output
 strip.setBrightness(64) # Limit brightness to ~1/4 duty cycle
 
@@ -128,16 +127,17 @@ while True:
     mindist = 0.5 # Min distance
     for i in range(16):
         for j in range(16):
-            d = max(mindist , pnt2line( matrixLEDxy(16*i+j) , start, end ) ) 
+            d = max(mindist , pnt2line( matrixLEDxy[16*i+j] , start, end ) ) 
             matrixLEDintensity[16*i+j] = int( math.floor( 64. * pow( mindist / d , 4. ) ))
     
     
     # Add the line intensity to the map and display it
     for i in range(16):
         for j in range(16):
-            matrixLEDcurrent[16*i+j] = matrixLEDcurrent[ 16*i+j ] +  matrixLEDxy[ 16*i+j ] # Store current values
-            # pixels( matrixLEDindex[ 16*i+j] ) = matrixLEDcurrent[ 16*i+j ]
+            matrixLEDcurrent[16*i+j] = matrixLEDcurrent[ 16*i+j ] +  matrixLEDintensity[ 16*i+j ] # Store current values
+            ## pixels( matrixLEDindex[ 16*i+j] ) = matrixLEDcurrent[ 16*i+j ]
             strip.setPixelColor( matrixLEDindex[ 16*i+j ] ,  matrixLEDcurrent[16*i+j] , 0 , 0 ) # Write to pixel o/p
-            
+ 
+    print matrixLEDcurrent    
     strip.show()                     # Refresh strip
     time.sleep(0.5 )    
