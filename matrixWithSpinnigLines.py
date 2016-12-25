@@ -124,11 +124,11 @@ for i in range(16):
 for iloop in range(10):
         
     # Move the current LED levels one to the left, and decrease the intensity level
-    if iloop < 10:
+    if True: # iloop < 10
         for i in range(16):
-            for j in range(15):
-                matrixLEDcurrent[16*i+j] = max(  0 , matrixLEDcurrent[16*(i)+(j+1)] - 10 )
-            j=15
+            for j in range(1,16):
+                matrixLEDcurrent[16*i+j] = max(  0 , 0.9 * matrixLEDcurrent[16*(i)+(j-1)]  ) # Decrease intensity
+            j=0
             matrixLEDcurrent[ 16*i+j ] = 0
 
 
