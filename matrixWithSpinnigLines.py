@@ -141,7 +141,7 @@ for iloop in range(100):
 
 
     if random.random() > 0.9 : # New line 20% of time  
-        if 0:
+        if True: # True - random position, False - fixed line/simple diagnonal
             # Pick a line with two random end points
             start = [ 16*random.random()-8. , 16*random.random()-8. , 0 ] 
             end = [ 16*random.random()-8. , 16*random.random()-8. , 0 ]
@@ -150,7 +150,7 @@ for iloop in range(100):
             end = [ 7.5 , 7.5 , 0 ]
                         
         # Create LED intensity map based on distance from line
-        mindist = 0.1 # Min distance
+        mindist = 0.5 # Min distance
         for i in range(16):
             for j in range(16):
                 d = max(mindist , pnt2line( matrixLEDxy[16*i+j] , start, end ) ) 
