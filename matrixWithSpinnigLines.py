@@ -89,10 +89,14 @@ numpixels = 3*300+255+256 # Number of LEDs in strip + disk + square
 #for i in range( numpixels ):
 #    pixels.append( 0 )
  
+maxLEDintensity = 128;
+ 
+ 
+ 
 if flagPi:        
     strip   = Adafruit_DotStar(numpixels, 4000000) # 4 MHz is more reliable
     strip.begin()           # Initialize pins for output
-    strip.setBrightness(64) # Limit brightness to ~1/4 duty cycle
+    strip.setBrightness(maxLEDintensity) # Limit brightness to ~1/4 duty cycle
 
 
 
@@ -121,7 +125,7 @@ for i in range(16):
             matrixLEDindex.append( matrixLEDindexOffset + i*16+(15-j) )
                 
 
-for iloop in range(100):
+for iloop in range(10000):
         
     # Move the current LED levels one to the left, and decrease the intensity level
     if True: # Rolls downwards
@@ -141,11 +145,17 @@ for iloop in range(100):
 
 
     if random.random() < 0.5 : # New line x% of time  
-        if True: # True - random position, False - fixed line/simple diagnonal
+        if False: # True - random position, 
             # Pick a line with two random end points
-            start = [ 16*random.random()-8. , 16*random.random()-8. , 0 ] 
-            end = [ 16*random.random()-8. , 16*random.random()-8. , 0 ]
-        else:
+            start = [ 16.*random.random()-8. , 16.*random.random()-8. , 0 ] 
+            end = [ 16.*random.random()-8. , 16.*random.random()-8. , 0 ]
+
+        elif True: # True - random position on larger canvas, 
+            # Pick a line with two random end points
+            start = [ 32.*random.random()-16. , 32.*random.random()-16. , 0 ] 
+            end = [ 32.*random.random()-16.. , 32.*random.random()-16. , 0 ]
+
+        else: # Simple Diagonal  - fixed line/simple diagnonal
             start = [ -7.5 , -7.5 , 0 ] 
             end = [ 7.5 , 7.5 , 0 ]
                         
@@ -154,7 +164,7 @@ for iloop in range(100):
         for i in range(16):
             for j in range(16):
                 d = max(mindist , pnt2line( matrixLEDxy[16*i+j] , start, end ) ) 
-                matrixLEDintensity[16*i+j] = int( math.floor( 64. * pow( mindist / d , 2. ) ))
+                matrixLEDintensity[16*i+j] = int( math.floor( float(maxLEDintensity) * pow( mindist / d , 2. ) ))
     else:
         # Don't add anything new
         for i in range(16):
@@ -168,7 +178,7 @@ for iloop in range(100):
             matrixLEDcurrent[16*i+j] = matrixLEDcurrent[ 16*i+j ] +  matrixLEDintensity[ 16*i+j ] # Store current values
             ## pixels( matrixLEDindex[ 16*i+j] ) = matrixLEDcurrent[ 16*i+j ]
             if flagPi:
-                strip.setPixelColor( matrixLEDindex[ 16*i+j ] , 0 ,  matrixLEDcurrent[16*i+j] , 0 ) # Write to pixel o/p, g,b,r
+                strip.setPixelColor( matrixLEDindex[ 16*i+j ] , 0 , 0 , matrixLEDcurrent[16*i+j] ) # Write to pixel o/p, g,r,b
  
 #    print matrixLEDcurrent    
     if flagPi:
