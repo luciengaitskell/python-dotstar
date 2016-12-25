@@ -138,6 +138,6 @@ while True:
             ## pixels( matrixLEDindex[ 16*i+j] ) = matrixLEDcurrent[ 16*i+j ]
             strip.setPixelColor( matrixLEDindex[ 16*i+j ] ,  matrixLEDcurrent[16*i+j] , 0 , 0 ) # Write to pixel o/p
  
-    print matrixLEDcurrent    
+#    print matrixLEDcurrent    
     strip.show()                     # Refresh strip
     time.sleep(0.5 )    
