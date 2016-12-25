@@ -103,16 +103,23 @@ matrixLEDintensity = []
 matrixLEDcurrent = []
 
 ll = [-7.5,-6.5,-5.5,-4.5,-3.5,-2.5,-1.5,-0.5,0.5,1.5,2.5,3.5,4.5,5.5,6.5,7.5]
-for i in ll:
-    for j in ll:
-        matrixLEDxy.append( [i,j,0] )
+for i in range(16):
+    for j in range(16):
         matrixLEDintensity.append( 0 )
         matrixLEDcurrent.append( 0 )
-
+        matrixLEDxy.append( [ll(i),ll(j),0] )
+        
 # Set up the LED APA102 index corresponding to the matrix
-matrixLEDindex = range(900+254, 900+254+256)
-
-
+# Must take account of snake pattern
+matrixLEDindexOffset = 900+254
+matrixLEDindex = []
+for i in range(16):
+    for j in range(16):
+        if mod(i,2)==0: # Take account of snake pattern
+            matrixLEDindex.append( matrixLEDindexOffset + i*16+j )
+        else:
+            matrixLEDindex.append( matrixLEDindexOffset + i*16+(15-j) )
+                
 
 for iloop in range(10):
         
@@ -152,7 +159,7 @@ for iloop in range(10):
             matrixLEDcurrent[16*i+j] = matrixLEDcurrent[ 16*i+j ] +  matrixLEDintensity[ 16*i+j ] # Store current values
             ## pixels( matrixLEDindex[ 16*i+j] ) = matrixLEDcurrent[ 16*i+j ]
             if flagPi:
-                strip.setPixelColor( matrixLEDindex[ 16*i+j ] ,  matrixLEDcurrent[16*i+j] , 0 , 0 ) # Write to pixel o/p
+                strip.setPixelColor( matrixLEDindex[ 16*i+j ] , 0 ,  matrixLEDcurrent[16*i+j] , 0 ) # Write to pixel o/p, g,b,r
  
 #    print matrixLEDcurrent    
     if flagPi:
