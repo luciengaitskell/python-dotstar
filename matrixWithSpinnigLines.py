@@ -90,7 +90,8 @@ numpixels = 3*300+255+256 # Number of LEDs in strip + disk + square
 #    pixels.append( 0 )
  
 maxLEDintensity = 64;
- 
+mindist = 0.25 # Min distance for LED relative to line function
+
  
  
 if flagPi:        
@@ -160,7 +161,6 @@ for iloop in range(10000):
             end = [ 7.5 , 7.5 , 0 ]
                         
         # Create LED intensity map based on distance from line
-        mindist = 0.5 # Min distance
         for i in range(16):
             for j in range(16):
                 d = max(mindist , pnt2line( matrixLEDxy[16*i+j] , start, end ) ) 
