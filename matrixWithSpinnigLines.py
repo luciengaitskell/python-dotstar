@@ -129,15 +129,15 @@ while True:
     for i in range(16):
         for j in range(16):
             d = max(mindist , pnt2line( matrixLEDxy(16*i+j) , start, end ) ) 
-            matrixLEDintensity(16*i+j) = int( math.floor( 64. * pow( mindist / d , 4. ) ))
+            matrixLEDintensity[16*i+j] = int( math.floor( 64. * pow( mindist / d , 4. ) ))
     
     
     # Add the line intensity to the map and display it
     for i in range(16):
         for j in range(16):
-            matrixLEDcurrent(16*i+j) = matrixLEDcurrent(16*i+j) +  matrixLEDxy(16*i+j) # Store current values
-            # pixels( matrixLEDindex(16*i+j) ) = matrixLEDcurrent(16*i+j)
-            strip.setPixelColor( matrixLEDindex(16*i+j) ,  matrixLEDcurrent(16*i+j) , 0 , 0 ) # Write to pixel o/p
+            matrixLEDcurrent[16*i+j] = matrixLEDcurrent[ 16*i+j ] +  matrixLEDxy[ 16*i+j ] # Store current values
+            # pixels( matrixLEDindex[ 16*i+j] ) = matrixLEDcurrent[ 16*i+j ]
+            strip.setPixelColor( matrixLEDindex[ 16*i+j ] ,  matrixLEDcurrent[16*i+j] , 0 , 0 ) # Write to pixel o/p
             
     strip.show()                     # Refresh strip
     time.sleep(0.5 )    
