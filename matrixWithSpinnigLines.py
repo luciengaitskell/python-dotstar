@@ -132,9 +132,12 @@ while True:
     
         
     if random.random()>0.99: # Change color every ~100 cycles
-          colscale = colscale * 256
-          if colscale>256^2:
-              colscale = 1
+        print "Set Color"
+        colscale = colscale * 256
+        print colscale
+        if colscale > 256*256:
+            colscale = 1
+            print "Reset Color"
                 
     # Move the current LED levels one to the left, and decrease the intensity level
     if True: # Rolls downwards
