@@ -83,7 +83,7 @@ def pnt2line(pnt, start, end):
 # ----------------------------------------------------------
 
 numpixels = 3*300+255+256 # Number of LEDs in strip + disk + square
-for i in numpixels:
+for i in range( numpixels ):
     pixels.append( 0 )
      
 strip   = Adafruit_DotStar(numpixels, 4000000) # 4 MHz is more reliable
