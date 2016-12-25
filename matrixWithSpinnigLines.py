@@ -140,7 +140,7 @@ for iloop in range(100):
             matrixLEDcurrent[ 16*i+j ] = 0
 
 
-    if random.random() > 0.9 : # New line 20% of time  
+    if random.random() < 0.5 : # New line x% of time  
         if True: # True - random position, False - fixed line/simple diagnonal
             # Pick a line with two random end points
             start = [ 16*random.random()-8. , 16*random.random()-8. , 0 ] 
@@ -154,7 +154,7 @@ for iloop in range(100):
         for i in range(16):
             for j in range(16):
                 d = max(mindist , pnt2line( matrixLEDxy[16*i+j] , start, end ) ) 
-                matrixLEDintensity[16*i+j] = int( math.floor( 64. * pow( mindist / d , 4. ) ))
+                matrixLEDintensity[16*i+j] = int( math.floor( 64. * pow( mindist / d , 2. ) ))
     else:
         # Don't add anything new
         for i in range(16):
