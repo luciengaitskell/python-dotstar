@@ -189,7 +189,7 @@ while True:
 
     for i in [item for item in range(pixstart,pixstop,1) if item not in pixlistbad]:
         x = 5 + int(math.floor(pow( random.random() , 20. )  * float(maxLEDintensity) ))
-        x = min(float(maxLEDintensity),x)
+        x = min( maxLEDintensity , x )
         strip.setPixelColor(i, 0 , 0 , x ) # 
 
  
