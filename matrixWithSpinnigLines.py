@@ -115,7 +115,7 @@ matrixLEDindexOffset = 900+254
 matrixLEDindex = []
 for i in range(16):
     for j in range(16):
-        if mod(i,2)==0: # Take account of snake pattern
+        if (i%2)==0: # Take account of snake pattern
             matrixLEDindex.append( matrixLEDindexOffset + i*16+j )
         else:
             matrixLEDindex.append( matrixLEDindexOffset + i*16+(15-j) )
