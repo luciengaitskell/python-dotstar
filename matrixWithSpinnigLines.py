@@ -126,7 +126,7 @@ for i in range(16):
             matrixLEDindex.append( matrixLEDindexOffset + i*16+(15-j) )
                 
 
-for iloop True:
+while True:
         
     # Move the current LED levels one to the left, and decrease the intensity level
     if True: # Rolls downwards
