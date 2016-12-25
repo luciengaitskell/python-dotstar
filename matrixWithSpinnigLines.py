@@ -89,7 +89,7 @@ numpixels = 3*300+255+256 # Number of LEDs in strip + disk + square
 #for i in range( numpixels ):
 #    pixels.append( 0 )
  
-maxLEDintensity = 128;
+maxLEDintensity = 64;
  
  
  
