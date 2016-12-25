@@ -3,10 +3,13 @@
 #
 #
 
+flagPi = False
+
 import math
 import random
 import time
-from dotstar import Adafruit_DotStar
+if flagPi:
+    from dotstar import Adafruit_DotStar
 
 
 # ----------------------------------------------------------
@@ -85,10 +88,11 @@ def pnt2line(pnt, start, end):
 numpixels = 3*300+255+256 # Number of LEDs in strip + disk + square
 #for i in range( numpixels ):
 #    pixels.append( 0 )
-     
-strip   = Adafruit_DotStar(numpixels, 4000000) # 4 MHz is more reliable
-strip.begin()           # Initialize pins for output
-strip.setBrightness(64) # Limit brightness to ~1/4 duty cycle
+ 
+if flagPi:        
+    strip   = Adafruit_DotStar(numpixels, 4000000) # 4 MHz is more reliable
+    strip.begin()           # Initialize pins for output
+    strip.setBrightness(64) # Limit brightness to ~1/4 duty cycle
 
 
 
@@ -110,12 +114,12 @@ matrixLEDindex = range(900+254, 900+254+256)
 
 
 
-for iloop in range(32):
+for iloop in range(10):
         
     # Move the current LED levels one to the left, and decrease the intensity level
     for i in range(16):
         for j in range(15):
-            matrixLEDcurrent[16*i+j] = max(  0 , matrixLEDcurrent[16*i+j] - 10 )
+            matrixLEDcurrent[16*i+j] = max(  0 , matrixLEDcurrent[16*(i)+(j+1)] - 10 )
         j=15
         matrixLEDcurrent[ 16*i+j ] = 0
 
@@ -147,8 +151,14 @@ for iloop in range(32):
         for j in range(16):
             matrixLEDcurrent[16*i+j] = matrixLEDcurrent[ 16*i+j ] +  matrixLEDintensity[ 16*i+j ] # Store current values
             ## pixels( matrixLEDindex[ 16*i+j] ) = matrixLEDcurrent[ 16*i+j ]
-            strip.setPixelColor( matrixLEDindex[ 16*i+j ] ,  matrixLEDcurrent[16*i+j] , 0 , 0 ) # Write to pixel o/p
+            if flagPi:
+                strip.setPixelColor( matrixLEDindex[ 16*i+j ] ,  matrixLEDcurrent[16*i+j] , 0 , 0 ) # Write to pixel o/p
  
 #    print matrixLEDcurrent    
-    strip.show()                     # Refresh strip
+    if flagPi:
+        strip.show()                     # Refresh strip
+    else:
+        print "----------"
+        print matrixLEDcurrent    
+
     time.sleep(0.5 )    
