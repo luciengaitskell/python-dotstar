@@ -121,7 +121,7 @@ for i in range(16):
             matrixLEDindex.append( matrixLEDindexOffset + i*16+(15-j) )
                 
 
-for iloop in range(10):
+for iloop in range(100):
         
     # Move the current LED levels one to the left, and decrease the intensity level
     if True: # Rolls downwards
@@ -131,8 +131,7 @@ for iloop in range(10):
                 # matrixLEDcurrent[16*i+j] = max(  0 ,  matrixLEDcurrent[16*(i)+(j-1)] -10 ) # Decrease intensity
             j=0
             matrixLEDcurrent[ 16*i+j ] = 0
-
-    if False: # Rolls upwards
+    else: # Rolls upwards
         for i in range(16):
             for j in range(15):
                 matrixLEDcurrent[16*i+j] = max(  0 , int(math.floor( 0.9 * float( matrixLEDcurrent[16*(i)+(j+1)] ) )) ) # Decrease intensity
@@ -141,7 +140,7 @@ for iloop in range(10):
             matrixLEDcurrent[ 16*i+j ] = 0
 
 
-    if iloop == 0:  
+    if random.random() > 0.9 : # New line 20% of time  
         if 0:
             # Pick a line with two random end points
             start = [ 16*random.random()-8. , 16*random.random()-8. , 0 ] 
@@ -178,4 +177,4 @@ for iloop in range(10):
         print "----------"
         print matrixLEDcurrent    
 
-    time.sleep(0.5 )    
+    time.sleep(0.05 )    
