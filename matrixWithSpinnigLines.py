@@ -107,7 +107,7 @@ for i in range(16):
     for j in range(16):
         matrixLEDintensity.append( 0 )
         matrixLEDcurrent.append( 0 )
-        matrixLEDxy.append( [ll(i),ll(j),0] )
+        matrixLEDxy.append( [ll[i],ll[j],0] )
         
 # Set up the LED APA102 index corresponding to the matrix
 # Must take account of snake pattern
