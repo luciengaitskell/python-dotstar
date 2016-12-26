@@ -59,12 +59,21 @@ def baseTwinkleOnce():
 
 if __name__ == "__main__":
     try:
+        swirlTime = time.time()
+        swirlSleepTime = 0.02
+        twinkleTime = time.time()
+        twinkleSleepTime = 0.05
         while True:
-            # Update the Disk Swirl:
-            swirlDiskStep()
 
-            # Update base twinkle:
-            baseTwinkleOnce()
+            if time.time() - swirlTime > swirlSleepTime:
+                # Update the Disk Swirl:
+                swirlDiskStep()
+                swirlTime = time.time()
+
+            if time.time() - twinkleTime > twinkleSleepTime:
+                # Update base twinkle:
+                baseTwinkleOnce()
+                twinkleTime = time.time()
 
             tree.show()                     # Refresh strip
             time.sleep(1.0 / 50)             # Pause 20 milliseconds (~50 fps)
