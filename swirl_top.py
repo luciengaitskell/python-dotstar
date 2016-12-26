@@ -79,9 +79,9 @@ def baseTwinkleOnce():
 if __name__ == "__main__":
     try:
         swirlTime = time.time()
-        swirlSleepTime = 0.02
+        swirlSleepTime = 0.01
         twinkleTime = time.time()
-        twinkleSleepTime = 0.05
+        twinkleSleepTime = 0.03
         while True:
 
             if time.time() - swirlTime > swirlSleepTime:
