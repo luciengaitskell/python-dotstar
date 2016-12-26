@@ -61,7 +61,7 @@ def baseTwinkleOnce():
 
     for px in range(startOfBase, endOfBase):
         # Get a random number in a specific range:
-        randomNumb = random.randrange(4, 33, 1)
+        randomNumb = random.randrange(4, 23, 1)
         color = []
 
         for ii in range(colorChangeIndex):
