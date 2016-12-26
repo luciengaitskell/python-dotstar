@@ -52,12 +52,27 @@ def swirlDiskStep():
 startOfBase = tree_lights.TreeLightSectionPositions.startOfBase
 endOfBase = tree_lights.TreeLightSectionPositions.endOfBase
 
+colorChangeIndex = 0
+
 
 def baseTwinkleOnce():
     """Twinkle the base lights on the tree once."""
+    global colorChangeIndex
+
     for px in range(startOfBase, endOfBase):
         # Get a random number in a specific range:
         randomNumb = random.randrange(4, 33, 1)
+        color = []
+
+        for ii in colorChangeIndex:
+            color.append(0)
+        color.append(randomNumb)
+        for ii in 3 - (colorChangeIndex + 1):
+            color.append(0)
+
+        colorChangeIndex += 1
+        if colorChangeIndex > 2:
+            colorChangeIndex = 0
         tree.setPixel(px, 0, randomNumb, 0)
 
 
