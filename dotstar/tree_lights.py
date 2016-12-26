@@ -8,6 +8,18 @@ SPI_SPEED = 4000000  # slower rate
 BADPIXELS = [593, 594]
 
 
+class TreeLightSectionPositions(object):
+    """The start and end positions of each section of the tree lights."""
+
+    # Disk:
+    startOfDisk = 3*300
+    endOfDisk = 3*300+255
+
+    # Base:
+    startOfBase = 0
+    endOfBase = 3*300
+
+
 class TreeLights(object):
     """Allows for easy control of the tree lights."""
 
