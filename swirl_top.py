@@ -73,7 +73,7 @@ def baseTwinkleOnce():
         colorChangeIndex += 1
         if colorChangeIndex > 2:
             colorChangeIndex = 0
-        tree.setPixel(px, 0, randomNumb, 0)
+        tree.setPixel(px, *color)
 
 
 if __name__ == "__main__":
