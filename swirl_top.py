@@ -34,8 +34,6 @@ def swirlDiskStep():
 
     tree.setPixel(swirlHead, *swirlColor)  # Turn on 'head' pixel
     tree.setPixel(swirlTail, 0)     # Turn off 'tail'
-    tree.show()                     # Refresh strip
-    time.sleep(1.0 / 50)             # Pause 20 milliseconds (~50 fps)
 
     swirlHead += 1                        # Advance head position
     if(swirlHead >= endOfDisk):           # Off end of strip?
@@ -57,7 +55,6 @@ def baseTwinkleOnce():
         # Get a random number in a specific range:
         randomNumb = random.randrange(4, 33, 1)
         tree.setPixel(px, 0, int(randomNumb*1.5), randomNumb)
-    tree.show()
 
 
 if __name__ == "__main__":
@@ -68,6 +65,9 @@ if __name__ == "__main__":
 
             # Update base twinkle:
             baseTwinkleOnce()
+
+            tree.show()                     # Refresh strip
+            time.sleep(1.0 / 50)             # Pause 20 milliseconds (~50 fps)
     except KeyboardInterrupt:
         # Shutdown pixels on interrupt:
         tree.zeroAllPixels()
