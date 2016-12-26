@@ -3,6 +3,7 @@
 
 from dotstar import tree_lights
 import time
+import random
 
 
 # Module information:
@@ -12,39 +13,61 @@ __version__ = "1.0"
 __maintainer__ = "Lucien Gaitskell"
 __status__ = "Development"
 
-startOfDisk = 3*300
-endOfDisk = 3*300+255
-
 
 # Initialize the strip:
 tree = tree_lights.TreeLights()  # slower rate
 
+# DISK SWIRL:
+startOfDisk = tree_lights.TreeLightSectionPositions.startOfDisk
+endOfDisk = tree_lights.TreeLightSectionPositions.endOfDisk
 
-def swirlDisk():
-    """Swirl the disk at the top of the tree."""
-    head  = startOfDisk    # Index of first 'on' pixel
-    tail  = startOfDisk-10  # Index of last 'off' pixel
-    color = [32, 0, 0]
+swirlHead  = startOfDisk    # Index of first 'on' pixel
+swirlTail  = startOfDisk-10  # Index of last 'off' pixel
+swirlColor = [32, 0, 0]
 
-    while True:                              # Loop forever
-        tree.setPixel(head, *color)  # Turn on 'head' pixel
-        tree.setPixel(tail, 0)     # Turn off 'tail'
-        tree.show()                     # Refresh strip
-        time.sleep(1.0 / 50)             # Pause 20 milliseconds (~50 fps)
 
-        head += 1                        # Advance head position
-        if(head >= endOfDisk):           # Off end of strip?
-            head = startOfDisk              # Reset to start
+def swirlDiskStep():
+    """Step the swirl on the disk at the top of the tree."""
+    global swirlHead
+    global swirlTail
+    global swirlColor
 
-        tail += 1                        # Advance tail position
-        if(tail >= endOfDisk):
-            tail = startOfDisk  # Off end? Reset
+    tree.setPixel(swirlHead, *swirlColor)  # Turn on 'head' pixel
+    tree.setPixel(swirlTail, 0)     # Turn off 'tail'
+    tree.show()                     # Refresh strip
+    time.sleep(1.0 / 50)             # Pause 20 milliseconds (~50 fps)
+
+    swirlHead += 1                        # Advance head position
+    if(swirlHead >= endOfDisk):           # Off end of strip?
+        swirlHead = startOfDisk              # Reset to start
+
+    swirlTail += 1                        # Advance tail position
+    if(swirlTail >= endOfDisk):
+        swirlTail = startOfDisk  # Off end? Reset
+
+
+# TWINKLE TREE BASE:
+startOfBase = tree_lights.TreeLightSectionPositions.startOfBase
+endOfBase = tree_lights.TreeLightSectionPositions.endOfBase
+
+
+def baseTwinkleOnce():
+    """Twinkle the base lights on the tree once."""
+    for px in range(startOfBase, endOfBase):
+        # Get a random number in a specific range:
+        randomNumb = random.randrange(4, 33, 1)
+        tree.setPixel(px, 0, int(randomNumb*1.5), randomNumb)
+    tree.show()
 
 
 if __name__ == "__main__":
     try:
-        # Run the main function:
-        swirlDisk()
+        while True:
+            # Update the Disk Swirl:
+            swirlDiskStep()
+
+            # Update base twinkle:
+            baseTwinkleOnce()
     except KeyboardInterrupt:
         # Shutdown pixels on interrupt:
         tree.zeroAllPixels()
