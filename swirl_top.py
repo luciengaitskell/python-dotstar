@@ -95,7 +95,6 @@ if __name__ == "__main__":
                 twinkleTime = time.time()
 
             tree.show()                     # Refresh strip
-            time.sleep(1.0 / 50)             # Pause 20 milliseconds (~50 fps)
     except KeyboardInterrupt:
         # Shutdown pixels on interrupt:
         tree.zeroAllPixels()
