@@ -43,6 +43,10 @@ def swirlDiskStep():
     if(swirlTail >= endOfDisk):
         swirlTail = startOfDisk  # Off end? Reset
 
+    appendColor = swirlColor[0]
+    del swirlColor[0]
+    swirlColor.append(appendColor)
+
 
 # TWINKLE TREE BASE:
 startOfBase = tree_lights.TreeLightSectionPositions.startOfBase
