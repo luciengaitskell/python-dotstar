@@ -64,10 +64,10 @@ def baseTwinkleOnce():
         randomNumb = random.randrange(4, 33, 1)
         color = []
 
-        for ii in colorChangeIndex:
+        for ii in range(colorChangeIndex):
             color.append(0)
         color.append(randomNumb)
-        for ii in 3 - (colorChangeIndex + 1):
+        for ii in range(3 - (colorChangeIndex + 1)):
             color.append(0)
 
         colorChangeIndex += 1
