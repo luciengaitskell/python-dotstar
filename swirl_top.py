@@ -54,7 +54,7 @@ def baseTwinkleOnce():
     for px in range(startOfBase, endOfBase):
         # Get a random number in a specific range:
         randomNumb = random.randrange(4, 33, 1)
-        tree.setPixel(px, 0, int(randomNumb*1.5), randomNumb)
+        tree.setPixel(px, 0, randomNumb, 0)
 
 
 if __name__ == "__main__":
